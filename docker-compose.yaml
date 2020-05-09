@@ -1,0 +1,34 @@
+version: "3.7"
+
+# Define services
+services:
+  api:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    container_name: az-desafio-rafael-camilo-backend
+    ports:
+      - 5000:80
+    expose:
+      - 80
+    restart: unless-stopped
+    depends_on:
+      - database
+    networks:
+      - backend
+
+  database:
+    build:
+      context: database
+      dockerfile: Dockerfile
+    container_name: az-desafio-rafael-camilo-database
+    expose:
+      - 3377
+    ports:
+      - 3377:3306
+    restart: unless-stopped
+    networks:
+      - backend
+
+networks:
+  backend:
