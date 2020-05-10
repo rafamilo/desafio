@@ -2,6 +2,7 @@ package com.desafio.desafio.domain.bidding.controllers;
 
 import com.desafio.desafio.domain.bidding.classifiers.enums.ClassifierType;
 import com.desafio.desafio.domain.bidding.controllers.exceptions.ResourceNotFoundException;
+import com.desafio.desafio.domain.bidding.dtos.BiddingDTO;
 import com.desafio.desafio.domain.bidding.dtos.IBiddingDTO;
 import com.desafio.desafio.domain.bidding.models.IBidding;
 import com.desafio.desafio.domain.bidding.services.IDeleteBiddingService;
@@ -43,12 +44,12 @@ public class BiddingController {
   }
 
   @PostMapping()
-  public IBiddingDTO post(@RequestBody IBiddingDTO biddingDTO) {
+  public IBiddingDTO post(@RequestBody BiddingDTO biddingDTO) {
     return IBiddingDTO.toDto(this.insertBiddingService.create(IBiddingDTO.toModel(biddingDTO)));
   }
 
   @PutMapping()
-  public IBiddingDTO put(@RequestBody IBiddingDTO biddingDTO) throws ResourceNotFoundException {
+  public IBiddingDTO put(@RequestBody BiddingDTO biddingDTO) throws ResourceNotFoundException {
     IBidding bidding = this.getBiddingService.findById(biddingDTO.getId())
         .orElseThrow(() -> new ResourceNotFoundException("Doesn't exist any user with id " + biddingDTO.getId()));
 
