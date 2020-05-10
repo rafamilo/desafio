@@ -4,6 +4,9 @@ import com.desafio.desafio.domain.bidding.BiddingRepository;
 import com.desafio.desafio.domain.bidding.models.Bidding;
 import com.desafio.desafio.domain.bidding.models.IBidding;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class InsertBiddingService implements IInsertBiddingService {
 
   private BiddingRepository biddingRepository;

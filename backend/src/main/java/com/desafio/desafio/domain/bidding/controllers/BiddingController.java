@@ -2,7 +2,6 @@ package com.desafio.desafio.domain.bidding.controllers;
 
 import com.desafio.desafio.domain.bidding.classifiers.enums.ClassifierType;
 import com.desafio.desafio.domain.bidding.controllers.exceptions.ResourceNotFoundException;
-import com.desafio.desafio.domain.bidding.dtos.BiddingDTO;
 import com.desafio.desafio.domain.bidding.dtos.IBiddingDTO;
 import com.desafio.desafio.domain.bidding.models.IBidding;
 import com.desafio.desafio.domain.bidding.services.IDeleteBiddingService;

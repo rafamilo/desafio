@@ -50,4 +50,4 @@ Desafio para avaliação de candidato
         A ordem de classificação: Fornecedor C, Fornecedor A e Fornecedor B
 
 
-```docker-compose up --build -d && sleep 15 && cd backend && mvn liquibase:migrate && cd ..```
+```cd backend && mvn package -DskipTests=true && cd ../ && docker-compose up --build -d && sleep 15 && cd backend && mvn liquibase:migrate && cd ..```
