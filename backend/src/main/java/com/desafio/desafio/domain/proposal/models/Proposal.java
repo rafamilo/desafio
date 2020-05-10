@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.desafio.desafio.domain.bidding.models.IBidding;
@@ -35,6 +36,7 @@ public class Proposal implements IProposal {
   private String createdDate;
 
   @Column
+  @ManyToOne()
   private IBidding bidding;
 
   public Integer getId() {
