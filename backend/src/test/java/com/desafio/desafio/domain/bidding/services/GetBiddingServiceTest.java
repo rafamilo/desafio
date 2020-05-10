@@ -36,4 +36,11 @@ public class GetBiddingServiceTest {
     getBiddingService.findAll();
     verify(biddingRepository, times(1)).findAll();
   }
+
+  @Test
+  public void shouldToCallRepositoryFindById() {
+    Integer biddingId = Integer.MAX_VALUE;
+    getBiddingService.findById(biddingId);
+    verify(biddingRepository, times(1)).findById(biddingId);
+  }
 }

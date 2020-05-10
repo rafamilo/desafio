@@ -1,6 +1,7 @@
 package com.desafio.desafio.domain.bidding.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.desafio.desafio.domain.bidding.BiddingRepository;
 import com.desafio.desafio.domain.bidding.models.Bidding;
@@ -16,8 +17,14 @@ public class GetBiddingService implements IGetBiddingService {
     this.biddingRepository = biddingRepository;
   }
 
-	public List<Bidding> findAll() {
+  @Override
+  public List<Bidding> findAll() {
     return (List<Bidding>) this.biddingRepository.findAll();
+  }
+
+  @Override
+  public Optional<Bidding> findById(Integer id) {
+    return this.biddingRepository.findById(id);
 	}
   
 }
