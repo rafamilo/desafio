@@ -48,3 +48,6 @@ Desafio para avaliação de candidato
         Fornecedor B, preço 115.00, data 23/10/2019 10:30
         Fornecedor C, preço 100.00, data 23/10/2019 10:40
         A ordem de classificação: Fornecedor C, Fornecedor A e Fornecedor B
+
+
+```docker-compose up --build -d && sleep 15 && cd backend && mvn liquibase:migrate && cd ..```
