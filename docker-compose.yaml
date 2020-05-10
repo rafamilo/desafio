@@ -6,43 +6,43 @@ services:
       context: backend
       dockerfile: Dockerfile
     container_name: az-desafio-rafael-camilo-backend
-    environment: 
-      - 'spring.profiles.active=dev'
-      - 'server.port=80'
-      - 'spring.datasource.initialization-mode=never'
-      - 'spring.datasource.hikari.connectionTimeout=20000'
-      - 'spring.datasource.hikari.maximumPoolSize=5'
-      - 'spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver'
-      - 'spring.datasource.url=jdbc:mysql://az-desafio-rafael-camilo-backend:3377/az_desafio_rafael_camilo'
-      - 'spring.datasource.username=root'
-      - 'spring.datasource.password=root'
-      - 'spring.liquibase.enabled=false'
-      - 'spring.liquibase.url=jdbc:mysql://az-desafio-rafael-camilo-backend:3377/az_desafio_rafael_camilo?useTimezone=true&serverTimezone=UTC'
-      - 'spring.liquibase.user=root'
-      - 'spring.liquibase.password=root'
-      - 'spring.liquibase.change-log=classpath:db/changelog/db.mysql.sql'
+    environment:
+      - "spring.datasource.initialization-mode=never"
+      - "spring.datasource.hikari.connectionTimeout=20000"
+      - "spring.datasource.hikari.maximumPoolSize=5"
+      - "spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver"
+      - "spring.datasource.url=jdbc:mysql://az-desafio-rafael-camilo-database:3306/az_desafio_rafael_camilo"
+      - "spring.datasource.username=root"
+      - "spring.datasource.password=root"
+      - "spring.liquibase.enabled=true"
+      - "spring.liquibase.url=jdbc:mysql://az-desafio-rafael-camilo-database:3306/az_desafio_rafael_camilo?useTimezone=true&serverTimezone=UTC"
+      - "spring.liquibase.user=root"
+      - "spring.liquibase.password=root"
+      - "spring.liquibase.change-log=classpath:db/changelog/db.mysql.sql"
     ports:
-      - 5000:80
+      - "8080:8080"
     expose:
-      - 80
+      - 8080
     restart: unless-stopped
     depends_on:
       - database
     networks:
-      - backend
+      - database
 
   database:
-    build:
-      context: database
-      dockerfile: Dockerfile
+    image: mysql:latest
     container_name: az-desafio-rafael-camilo-database
-    expose:
-      - 3377
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=az_desafio_rafael_camilo
     ports:
-      - 3377:3306
+      - "3306:3306"
+    expose:
+      - 3306
     restart: unless-stopped
     networks:
-      - backend
+      - database
 
 networks:
-  backend:
+  database:
