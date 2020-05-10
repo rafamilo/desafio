@@ -1,5 +1,12 @@
 package com.desafio.desafio.domain.bidding.dtos;
 
+import com.desafio.desafio.domain.bidding.classifiers.enums.ClassifierType;
+import com.desafio.desafio.domain.bidding.models.Bidding;
+import com.desafio.desafio.domain.bidding.models.IBidding;
+
+import org.springframework.stereotype.Service;
+
+@Service
 public class BiddingDTO implements IBiddingDTO {
   private Integer id;
   private String description;
