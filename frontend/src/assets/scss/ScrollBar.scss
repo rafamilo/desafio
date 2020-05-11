@@ -1,0 +1,31 @@
+html {
+  scroll-behavior: smooth !important;
+}
+
+// /* width */
+::-webkit-scrollbar {
+  display: none !important;
+}
+
+.rolagem {
+  ::-webkit-scrollbar {
+    display: block !important;
+    width: 5px;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: white;
+    border-radius: 4px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #dad0d0;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #8f8181;
+  }
+}
