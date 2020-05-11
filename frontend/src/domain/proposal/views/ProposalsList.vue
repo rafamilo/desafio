@@ -52,7 +52,6 @@ export default {
         { text: "Preço", value: "price" },
         { text: "Data Cadastro", value: "createdDate" },
         { text: "Classificador", value: "classificator" },
-        { text: "Licitação", value: "bidding" }
       ],
       heightTable: "92vh"
     };
