@@ -51,6 +51,7 @@ const { mapGetters } = createNamespacedHelpers("Proposals");
 import NewProposalModal from "../components/NewProposalModal";
 import UpdateProposalForm from "../components/UpdateProposalForm";
 import ProposalsRest from "../ProposalsRest";
+import _ from "lodash";
 
 export default {
   name: "ProposalsList",
@@ -71,7 +72,6 @@ export default {
         { text: "Nota", value: "note" },
         { text: "Preço", value: "price" },
         { text: "Data Cadastro", value: "createdDate" },
-        { text: "Classificador", value: "classificator" },
         { text: "Ações", value: "actions" }
       ],
       heightTable: "92vh"
@@ -107,6 +107,7 @@ export default {
     },
     filterProposals(proposals) {
       this.proposals = proposals || this.proposals;
+
       return (this.proposals = this.getProposals.filter(
         proposal =>
           proposal.provider.includes(this.search.toLowerCase()) ||
@@ -115,7 +116,7 @@ export default {
           proposal.createdDate.includes(this.search.toLowerCase()) ||
           proposal.classificator.includes(this.search.toLowerCase()) ||
           proposal.bidding.includes(this.search.toLowerCase())
-      ));
+      ), this.proposals = _.orderBy(this.proposals, ['bidding.type', 'note', 'price', 'createdDate'], ['desc', 'asc', 'asc', 'asc']));
     },
     onResize() {
       const heightHeaders =

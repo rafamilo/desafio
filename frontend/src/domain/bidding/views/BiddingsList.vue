@@ -97,7 +97,8 @@ export default {
       }
     },
     filterBiddings(biddings) {
-      this.biddings = biddings || this.proposals;
+      this.biddings = biddings || this.biddings;
+
       return (this.biddings = this.getBiddings.filter(
         bidding =>
           bidding.description.includes(this.search.toLowerCase()) ||
