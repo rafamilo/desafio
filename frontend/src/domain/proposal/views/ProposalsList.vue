@@ -2,7 +2,7 @@
   <v-content class="ProposalsList">
     <v-card>
       <v-card-title id="card-title">
-        Employees
+        Propostas
         <v-spacer></v-spacer>
         <v-text-field
           @input="filterProposals()"

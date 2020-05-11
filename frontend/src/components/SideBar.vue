@@ -1,5 +1,5 @@
 <template>
-<div class="Sidebar">
+  <div class="Sidebar">
     <v-navigation-drawer v-model="openSidebar" :clipped="$vuetify.breakpoint.lgAndUp" app>
       <v-list dense>
         <template v-for="item in items">
@@ -32,7 +32,7 @@
               </v-list-item-content>
             </v-list-item>
           </v-list-group>
-          <v-list-item v-else :key="item.text" light link :href="item.routePath">
+          <v-list-item v-else :key="item.text" link :href="item.routePath">
             <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-action>
@@ -55,33 +55,15 @@ export default {
   data: () => ({
     items: [
       {
-        icon: "mdi-chevron-up",
-        "icon-alt": "mdi-chevron-down",
+        icon: "mdi-view-list",
         text: "Propostas",
-        model: false,
-        children: [
-          {
-            icon: "mdi-view-list",
-            text: "Lista",
-            routePath: "/proposals"
-          },
-          { icon: "mdi-cctv", text: "Nova Proposta", routePath: "/proposals-add" }
-        ]
+        routePath: "/proposals"
       },
       {
-        icon: "mdi-chevron-up",
-        "icon-alt": "mdi-chevron-down",
+        icon: "mdi-view-list",
         text: "Licitações",
-        model: false,
-        children: [
-          {
-            icon: "mdi-view-list",
-            text: "Lista",
-            routePath: "/biddings"
-          },
-          { icon: "mdi-cctv", text: "Nova Licitação", routePath: "/biddings-add" }
-        ]
-      },
+        routePath: "/bidding"
+      }
     ]
   })
 };

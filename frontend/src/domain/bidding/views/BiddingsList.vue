@@ -2,7 +2,7 @@
   <v-content class="ProposalsList">
     <v-card>
       <v-card-title id="card-title">
-        Employees
+        Licitações
         <v-spacer></v-spacer>
         <v-text-field
           @input="filterProposals()"
@@ -24,8 +24,19 @@
         disable-sort
         hide-default-footer
         loading-text="Loading... Please wait"
-      ></v-data-table>
+      >
+        <template v-slot:item.actions="{ item }">
+          <v-icon small class="mr-2" @click="openEditBiddingModal(item)">Editar</v-icon>
+        </template>
+      </v-data-table>
     </v-card>
+    <v-dialog v-model="dialog">
+      <UpdateBiddingForm
+        ref="updateBiddingForm"
+        :bidding="bidding"
+        v-on:finished="dialog = false"
+      />
+    </v-dialog>
     <NewBiddingModal />
   </v-content>
 </template>
@@ -33,15 +44,17 @@
 <script>
 import { createNamespacedHelpers } from "vuex";
 import NewBiddingModal from "@/domain/bidding/components/NewBiddingModal";
+import UpdateBiddingForm from "@/domain/bidding/components/UpdateBiddingForm";
 const { mapGetters, mapActions } = createNamespacedHelpers("Biddings");
 
 export default {
   name: "BiddingsList",
-  components: { NewBiddingModal },
+  components: { NewBiddingModal, UpdateBiddingForm },
   data() {
     return {
       dialog: false,
       search: "",
+      bidding: {},
       biddings: [],
       headers: [
         {
@@ -50,7 +63,8 @@ export default {
           sortable: false,
           value: "description"
         },
-        { text: "Tipo Classificação", value: "type" }
+        { text: "Tipo Classificação", value: "type" },
+        { text: "", value: "actions" }
       ],
       heightTable: "92vh"
     };
@@ -65,6 +79,10 @@ export default {
   },
   methods: {
     ...mapActions(["findAll"]),
+    openEditBiddingModal(bidding) {
+      this.dialog = !this.dialog;
+      this.bidding = bidding;
+    },
     filterBiddings(biddings) {
       this.biddings = biddings || this.proposals;
       return (this.biddings = this.getBiddings.filter(

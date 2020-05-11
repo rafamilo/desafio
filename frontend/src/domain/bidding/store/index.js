@@ -10,7 +10,7 @@ export default {
   },
   getters: {
     getBiddings: (state) => state.biddings,
-    getLoadingBidding: (state) => state.loading.biddings,
+    getLoadingBiddings: (state) => state.loading.biddings,
   },
   mutations: {
     SET_BIDDINGS: (state, biddings) => (state.biddings = biddings),
