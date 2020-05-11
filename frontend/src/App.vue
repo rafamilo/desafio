@@ -1,12 +1,7 @@
 <template>
   <v-app id="inspire">
     <Header />
-
     <router-view/>
-
-    <v-footer app>
-      <span>&copy; 2020</span>
-    </v-footer>
   </v-app>
 </template>
 

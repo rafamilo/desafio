@@ -24,18 +24,20 @@
         disable-sort
         hide-default-footer
         loading-text="Loading... Please wait"
-      >
-      </v-data-table>
+      ></v-data-table>
     </v-card>
+    <NewBiddingModal />
   </v-content>
 </template>
 
 <script>
 import { createNamespacedHelpers } from "vuex";
+import NewBiddingModal from "@/domain/bidding/components/NewBiddingModal";
 const { mapGetters, mapActions } = createNamespacedHelpers("Biddings");
 
 export default {
   name: "BiddingsList",
+  components: { NewBiddingModal },
   data() {
     return {
       dialog: false,
@@ -48,7 +50,7 @@ export default {
           sortable: false,
           value: "description"
         },
-        { text: "Tipo Classificação", value: "type" },
+        { text: "Tipo Classificação", value: "type" }
       ],
       heightTable: "92vh"
     };

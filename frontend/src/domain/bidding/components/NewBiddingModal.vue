@@ -1,11 +1,11 @@
 <template>
   <div class="NewBiddingModal">
-    <v-btn bottom color="pink" dark fab fixed right @click="dialog = !dialog">
-      <v-icon>mdi-plus</v-icon>
+    <v-btn bottom color="pink" dark fixed right @click="dialog = !dialog">
+      Nova Licitação
     </v-btn>
     <v-dialog v-model="dialog">
       <v-card>
-        <v-card-title class="grey lighten-2">Nova Licitação</v-card-title>
+        <v-card-title class="grey darken-2">Nova Licitação</v-card-title>
         <v-container>
           <v-form ref="form" v-model="valid" :lazy-validation="true">
             <v-row class="mx-2">
@@ -33,7 +33,6 @@
           </v-form>
         </v-container>
         <v-card-actions>
-          <v-btn text color="primary">More</v-btn>
           <v-spacer />
           <v-btn text color="primary" @click="dialog = false">Cancelar</v-btn>
           <v-btn text @click="saveBidding">Salvar</v-btn>
@@ -45,7 +44,7 @@
 
 <script>
 import { createNamespacedHelpers } from "vuex";
-import BiddingRest from "../domain/bidding/BiddingRest";
+import BiddingRest from "@/domain/bidding/BiddingsRest";
 const { mapActions } = createNamespacedHelpers("Biddings");
 
 export default {
