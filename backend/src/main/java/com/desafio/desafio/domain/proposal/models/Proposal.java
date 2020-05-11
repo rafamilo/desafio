@@ -4,12 +4,15 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.desafio.desafio.domain.bidding.models.Bidding;
 import com.desafio.desafio.domain.bidding.models.IBidding;
 
 import org.springframework.stereotype.Service;
@@ -35,9 +38,9 @@ public class Proposal implements IProposal {
   @Column
   private String createdDate;
 
-  @Column
-  @ManyToOne()
-  private IBidding bidding;
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "bidding_id")
+  private Bidding bidding;
 
   @Column
   private Integer classificator;
@@ -87,7 +90,7 @@ public class Proposal implements IProposal {
   }
 
   public void setBidding(IBidding bidding) {
-    this.bidding = bidding;
+    this.bidding = (Bidding) bidding;
   }
 
   public Integer getClassificator() {

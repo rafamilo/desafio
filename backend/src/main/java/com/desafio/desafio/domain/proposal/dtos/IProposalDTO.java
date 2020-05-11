@@ -2,6 +2,7 @@ package com.desafio.desafio.domain.proposal.dtos;
 
 import java.math.BigDecimal;
 
+import com.desafio.desafio.domain.bidding.dtos.BiddingDTO;
 import com.desafio.desafio.domain.bidding.dtos.IBiddingDTO;
 import com.desafio.desafio.domain.proposal.models.IProposal;
 import com.desafio.desafio.domain.proposal.models.Proposal;
@@ -27,9 +28,9 @@ public interface IProposalDTO {
 
   public void setCreatedDate(String createdDate);
 
-  public IBiddingDTO getBidding();
-  
-  public void setBidding(IBiddingDTO bidding);
+  public BiddingDTO getBidding();
+
+  public void setBidding(BiddingDTO bidding);
 
   public static IProposal toModel(IProposalDTO proposalDTO) {
     IProposal proposal = new Proposal();
@@ -39,8 +40,9 @@ public interface IProposalDTO {
     proposal.setNote(proposalDTO.getNote());
     proposal.setPrice(proposalDTO.getPrice());
     proposal.setCreatedDate(proposalDTO.getCreatedDate());
+
     try {
-      proposal.setBidding(IBiddingDTO.toModel(proposalDTO.getBidding())); 
+      proposal.setBidding(IBiddingDTO.toModel(proposalDTO.getBidding()));
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -56,8 +58,9 @@ public interface IProposalDTO {
     proposalDTO.setNote(proposal.getNote());
     proposalDTO.setPrice(proposal.getPrice());
     proposalDTO.setCreatedDate(proposal.getCreatedDate());
+
     try {
-      proposalDTO.setBidding(IBiddingDTO.toDto(proposal.getBidding()));
+      proposalDTO.setBidding((BiddingDTO) IBiddingDTO.toDto(proposal.getBidding()));
     } catch (Exception e) {
       e.printStackTrace();
     }

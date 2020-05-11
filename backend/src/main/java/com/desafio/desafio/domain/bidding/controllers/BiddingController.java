@@ -1,10 +1,8 @@
 package com.desafio.desafio.domain.bidding.controllers;
 
-import com.desafio.desafio.domain.bidding.classifiers.enums.ClassifierType;
 import com.desafio.desafio.domain.bidding.controllers.exceptions.ResourceNotFoundException;
 import com.desafio.desafio.domain.bidding.dtos.BiddingDTO;
 import com.desafio.desafio.domain.bidding.dtos.IBiddingDTO;
-import com.desafio.desafio.domain.bidding.models.IBidding;
 import com.desafio.desafio.domain.bidding.services.IDeleteBiddingService;
 import com.desafio.desafio.domain.bidding.services.IGetBiddingService;
 import com.desafio.desafio.domain.bidding.services.IInsertBiddingService;
@@ -25,13 +23,13 @@ import java.util.stream.Collectors;
 @RequestMapping("/biddings")
 public class BiddingController {
 
-  private IGetBiddingService getBiddingService;
-  private IInsertBiddingService insertBiddingService;
-  private IUpdateBiddingService updateBiddingService;
-  private IDeleteBiddingService deleteBiddingService;
+  private final IGetBiddingService getBiddingService;
+  private final IInsertBiddingService insertBiddingService;
+  private final IUpdateBiddingService updateBiddingService;
+  private final IDeleteBiddingService deleteBiddingService;
 
-  public BiddingController(IGetBiddingService getBiddingService, IInsertBiddingService insertBiddingService,
-      IUpdateBiddingService updateBiddingService, IDeleteBiddingService deleteBiddingService) {
+  public BiddingController(final IGetBiddingService getBiddingService, final IInsertBiddingService insertBiddingService,
+      final IUpdateBiddingService updateBiddingService, final IDeleteBiddingService deleteBiddingService) {
     this.getBiddingService = getBiddingService;
     this.insertBiddingService = insertBiddingService;
     this.updateBiddingService = updateBiddingService;
@@ -44,23 +42,20 @@ public class BiddingController {
   }
 
   @PostMapping()
-  public IBiddingDTO post(@RequestBody BiddingDTO biddingDTO) {
+  public IBiddingDTO post(@RequestBody final BiddingDTO biddingDTO) {
     return IBiddingDTO.toDto(this.insertBiddingService.create(IBiddingDTO.toModel(biddingDTO)));
   }
 
   @PutMapping()
   public IBiddingDTO put(@RequestBody BiddingDTO biddingDTO) throws ResourceNotFoundException {
-    IBidding bidding = this.getBiddingService.findById(biddingDTO.getId())
-        .orElseThrow(() -> new ResourceNotFoundException("Doesn't exist any user with id " + biddingDTO.getId()));
+    this.getBiddingService.findById(biddingDTO.getId())
+    .orElseThrow(() -> new ResourceNotFoundException("Doesn't exist any bidding with this id"));
 
-    bidding.setDescription(biddingDTO.getDescription());
-    bidding.setType(ClassifierType.valueOf(biddingDTO.getType()));
-
-    return IBiddingDTO.toDto(this.updateBiddingService.update(bidding));
+    return IBiddingDTO.toDto(this.updateBiddingService.update(IBiddingDTO.toModel(biddingDTO)));
   }
 
   @DeleteMapping()
-  public void delete(@RequestParam Integer id) {
+  public void delete(@RequestParam final Integer id) {
     this.deleteBiddingService.deleteById(id);
   }
 }

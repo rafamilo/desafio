@@ -2,7 +2,7 @@ package com.desafio.desafio.domain.proposal.dtos;
 
 import java.math.BigDecimal;
 
-import com.desafio.desafio.domain.bidding.dtos.IBiddingDTO;
+import com.desafio.desafio.domain.bidding.dtos.BiddingDTO;
 
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ public class ProposalDTO implements IProposalDTO {
   private BigDecimal note;
   private BigDecimal price;
   private String createdDate;
-  private IBiddingDTO bidding;
+  private BiddingDTO bidding;
 
   public Integer getId() {
     return id;
@@ -55,11 +55,11 @@ public class ProposalDTO implements IProposalDTO {
     this.createdDate = createdDate;
   }
 
-  public IBiddingDTO getBidding() {
+  public BiddingDTO getBidding() {
     return bidding;
   }
 
-  public void setBidding(IBiddingDTO bidding) {
+  public void setBidding(BiddingDTO bidding) {
     this.bidding = bidding;
   }
 }
