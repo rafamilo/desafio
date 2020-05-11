@@ -1,6 +1,7 @@
 import VueRouter from "vue-router";
 import RouterView from "../views/RouterView.vue";
 import ProposalsList from "@/domain/proposal/views/ProposalsList";
+import BiddingsList from "@/domain/bidding/views/BiddingsList";
 
 let instance = false;
 
@@ -37,7 +38,20 @@ export default class VueRouterConfig {
             }
           ]
         },
+        {
+          path: "/biddings",
+          name: "biddings",
+          redirect: { name: "biddings.list" },
+          component: RouterView,
+          children: [
+            {
+              path: "biddings-list",
+              name: "biddings.list",
+              component: BiddingsList
+            }
+          ]
+        }
       ]
-    }
-  ];
+    },
+  ]
 }
