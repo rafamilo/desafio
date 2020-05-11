@@ -26,7 +26,8 @@
         loading-text="Loading... Please wait"
       >
         <template v-slot:item.actions="{ item }">
-          <v-icon small class="mr-2" @click="openEditBiddingModal(item)">Editar</v-icon>
+          <button class="mr-2" @click="openEditBiddingModal(item)">Editar</button>
+          <button class="ml-5" @click="deleteBidding(item)">Deletar</button>
         </template>
       </v-data-table>
     </v-card>
@@ -45,6 +46,7 @@
 import { createNamespacedHelpers } from "vuex";
 import NewBiddingModal from "@/domain/bidding/components/NewBiddingModal";
 import UpdateBiddingForm from "@/domain/bidding/components/UpdateBiddingForm";
+import BiddingsRest from "@/domain/bidding/BiddingsRest";
 const { mapGetters, mapActions } = createNamespacedHelpers("Biddings");
 
 export default {
@@ -64,7 +66,7 @@ export default {
           value: "description"
         },
         { text: "Tipo Classificação", value: "type" },
-        { text: "", value: "actions" }
+        { text: "Ações", value: "actions" }
       ],
       heightTable: "92vh"
     };
@@ -82,6 +84,15 @@ export default {
     openEditBiddingModal(bidding) {
       this.dialog = !this.dialog;
       this.bidding = bidding;
+    },
+    async deleteBidding(bidding) {
+      try {
+        await new BiddingsRest().deleteBidding(bidding.id);
+        alert("Licitação deletada com sucesso!");
+        this.findAllBiddings();
+      } catch (error) {
+        alert("Não foi possível deletar essa licitação");
+      }
     },
     filterBiddings(biddings) {
       this.biddings = biddings || this.proposals;
