@@ -1,5 +1,4 @@
 import axios from "axios";
-import VueRouterConfig from "./VueRouterConfig";
 
 let instance = false;
 
