@@ -18,10 +18,10 @@ export default {
       (state.loading.biddings = loading),
   },
   actions: {
-    findAll: async ({ commit }) => {
+    findAllBiddings: async ({ commit }) => {
       try {
         commit("SET_LOADING_BIDDINGS", true);
-        const { data } = await new BiddingsRest().findAll();
+        const { data } = await new BiddingsRest().findAllBiddings();
         commit("SET_BIDDINGS", data);
       } catch (error) {
         alert(error.data.message);

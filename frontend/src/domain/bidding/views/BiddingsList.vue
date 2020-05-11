@@ -78,7 +78,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["findAll"]),
+    ...mapActions(["findAllBiddings"]),
     openEditBiddingModal(bidding) {
       this.dialog = !this.dialog;
       this.bidding = bidding;
@@ -99,7 +99,7 @@ export default {
     }
   },
   created() {
-    this.findAll();
+    this.findAllBiddings();
   },
   mounted() {
     window.addEventListener("resize", this.onResize);

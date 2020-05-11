@@ -24,18 +24,20 @@
         disable-sort
         hide-default-footer
         loading-text="Loading... Please wait"
-      >
-      </v-data-table>
+      ></v-data-table>
     </v-card>
+    <NewProposalModal />
   </v-content>
 </template>
 
 <script>
-import { createNamespacedHelpers } from "vuex";
-const { mapGetters, mapActions } = createNamespacedHelpers("Proposals");
+import { createNamespacedHelpers, mapActions } from "vuex";
+const { mapGetters } = createNamespacedHelpers("Proposals");
+import NewProposalModal from "../components/NewProposalModal";
 
 export default {
   name: "ProposalsList",
+  components: { NewProposalModal },
   data() {
     return {
       dialog: false,
@@ -51,13 +53,13 @@ export default {
         { text: "Nota", value: "note" },
         { text: "Preço", value: "price" },
         { text: "Data Cadastro", value: "createdDate" },
-        { text: "Classificador", value: "classificator" },
+        { text: "Classificador", value: "classificator" }
       ],
       heightTable: "92vh"
     };
   },
   computed: {
-    ...mapGetters(["getLoadingProposals", "getProposals"])
+    ...mapGetters(["getLoadingProposals", "getProposals"]),
   },
   watch: {
     getProposals(proposals) {
@@ -65,7 +67,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["findAll"]),
+    ...mapActions("Proposals", ["findAll"]),
+    ...mapActions("Biddings", ["findAllBiddings"]),
     filterProposals(proposals) {
       this.proposals = proposals || this.proposals;
       return (this.proposals = this.getProposals.filter(
@@ -87,6 +90,7 @@ export default {
   },
   created() {
     this.findAll();
+    this.findAllBiddings();
   },
   mounted() {
     window.addEventListener("resize", this.onResize);

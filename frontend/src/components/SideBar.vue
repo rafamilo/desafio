@@ -55,14 +55,12 @@ export default {
   data: () => ({
     items: [
       {
-        icon: "mdi-view-list",
         text: "Propostas",
         routePath: "/proposals"
       },
       {
-        icon: "mdi-view-list",
         text: "Licitações",
-        routePath: "/bidding"
+        routePath: "/biddings"
       }
     ]
   })

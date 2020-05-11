@@ -69,7 +69,7 @@ export default {
     }
   }),
   methods: {
-    ...mapActions(["findAll"]),
+    ...mapActions(["findAllBiddings"]),
     async validate() {
       return await this.$refs.form.validate();
     },
@@ -80,7 +80,7 @@ export default {
           alert("Licitação salva com sucesso!");
           this.bidding = { description: "", type: "" };
           this.dialog = false;
-          this.findAll();
+          this.findAllBiddings();
         } catch (error) {
           alert("Licitação não pode ser salva!");
         }
