@@ -11,5 +11,6 @@ export default class ProposalsRest extends HttpConfig {
     proposal.note = proposal.note.replace(",", ".");
     proposal.price = proposal.price.replace(",", ".");
     await this.put("proposals", { ...proposal });
-  }
+  };
+  deleteProposal = async proposalId => await this.delete(`proposals?id=${proposalId}`);
 }

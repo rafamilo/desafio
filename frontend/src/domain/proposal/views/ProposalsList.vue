@@ -26,12 +26,17 @@
         loading-text="Loading... Please wait"
       >
         <template v-slot:item.actions="{ item }">
-          <v-icon small class="mr-2" @click="openEditProposalModal(item)">Editar</v-icon>
+          <button class="mr-2" @click="openEditProposalModal(item)">Editar</button>
+          <button class="ml-5" @click="deleteProposal(item)">Deletar</button>
         </template>
       </v-data-table>
     </v-card>
     <v-dialog v-model="dialog">
-      <UpdateProposalForm ref="updateProposalForm" :proposal="proposal" v-on:finished="dialog = false" />
+      <UpdateProposalForm
+        ref="updateProposalForm"
+        :proposal="proposal"
+        v-on:finished="dialog = false"
+      />
     </v-dialog>
     <NewProposalModal />
   </v-content>
@@ -42,6 +47,7 @@ import { createNamespacedHelpers, mapActions } from "vuex";
 const { mapGetters } = createNamespacedHelpers("Proposals");
 import NewProposalModal from "../components/NewProposalModal";
 import UpdateProposalForm from "../components/UpdateProposalForm";
+import ProposalsRest from "../ProposalsRest";
 
 export default {
   name: "ProposalsList",
@@ -63,7 +69,7 @@ export default {
         { text: "Preço", value: "price" },
         { text: "Data Cadastro", value: "createdDate" },
         { text: "Classificador", value: "classificator" },
-        { text: "", value: "actions" }
+        { text: "Ações", value: "actions" }
       ],
       heightTable: "92vh"
     };
@@ -82,6 +88,16 @@ export default {
     openEditProposalModal(proposal) {
       this.dialog = !this.dialog;
       this.proposal = proposal;
+    },
+    async deleteProposal(proposal) {
+      try {
+        await new ProposalsRest().deleteProposal(proposal.id);
+        alert("Proposta deletada com sucesso!");
+        this.findAll();
+        this.findAllBiddings();
+      } catch (error) {
+        alert("Não foi possível deletar essa Proposta");
+      }
     },
     filterProposals(proposals) {
       this.proposals = proposals || this.proposals;
