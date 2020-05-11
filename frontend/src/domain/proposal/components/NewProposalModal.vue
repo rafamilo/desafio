@@ -7,7 +7,7 @@
         <v-container>
           <v-form ref="form" v-model="valid" :lazy-validation="true">
             <v-row class="mx-2">
-              <v-col cols="12" md="6">
+              <v-col cols="12" md="12">
                 <v-select
                   v-model="proposal.provider"
                   :items="providers"
@@ -17,7 +17,17 @@
                   prepend-icon="mdi-domain"
                 />
               </v-col>
-              <v-col class="align-center justify-space-between" cols="12" md="6">
+              <v-col cols="12" md="6">
+                <v-select
+                  v-model="proposal.bidding"
+                  :items="getBiddings"
+                  :item-text="'description'"
+                  label="Licitação"
+                  prepend-icon="mdi-domain"
+                  return-object
+                />
+              </v-col>
+              <v-col v-if="proposal.bidding && proposal.bidding.type === 'NOTA_PRECO'" class="align-center justify-space-between" cols="12" md="6">
                 <v-text-field
                   v-model="proposal.note"
                   placeholder="Nota"
@@ -36,16 +46,6 @@
                   v-model="proposal.createdDate"
                   placeholder="Data Cadastro"
                   prepend-icon="mdi-account"
-                />
-              </v-col>
-              <v-col cols="12" md="6">
-                <v-select
-                  v-model="proposal.bidding"
-                  :items="getBiddings"
-                  :item-text="'description'"
-                  label="Licitação"
-                  prepend-icon="mdi-domain"
-                  return-object
                 />
               </v-col>
             </v-row>

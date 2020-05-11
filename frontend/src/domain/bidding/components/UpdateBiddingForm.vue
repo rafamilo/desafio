@@ -1,6 +1,6 @@
 <template>
   <v-card class="NewBiddingModal">
-    <v-card-title class="grey darken-2">Nova Licitação</v-card-title>
+    <v-card-title class="grey darken-2">Editar Licitação</v-card-title>
     <v-container>
       <v-form ref="form" v-model="valid" :lazy-validation="true">
         <v-row class="mx-2">
