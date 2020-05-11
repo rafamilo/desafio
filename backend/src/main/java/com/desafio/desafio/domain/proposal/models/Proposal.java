@@ -39,6 +39,9 @@ public class Proposal implements IProposal {
   @ManyToOne()
   private IBidding bidding;
 
+  @Column
+  private Integer classificator;
+
   public Integer getId() {
     return id;
   }
@@ -85,5 +88,13 @@ public class Proposal implements IProposal {
 
   public void setBidding(IBidding bidding) {
     this.bidding = bidding;
+  }
+
+  public Integer getClassificator() {
+    return classificator;
+  }
+
+  public void setClassificator(Integer classificator) {
+    this.classificator = classificator;
   }
 }
