@@ -25,6 +25,9 @@
         hide-default-footer
         loading-text="Loading... Please wait"
       >
+      <template v-slot:item.note="{ item }">
+        {{ itemNote(item) }}
+      </template>
         <template v-slot:item.actions="{ item }">
           <button class="mr-2" @click="openEditProposalModal(item)">Editar</button>
           <button class="ml-5" @click="deleteProposal(item)">Deletar</button>
@@ -88,6 +91,9 @@ export default {
     openEditProposalModal(proposal) {
       this.dialog = !this.dialog;
       this.proposal = proposal;
+    },
+    itemNote(item) {
+      return item.bidding.type === "NOTA_PRECO" && item.note || ""
     },
     async deleteProposal(proposal) {
       try {

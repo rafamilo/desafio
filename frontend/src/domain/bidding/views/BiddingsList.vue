@@ -25,6 +25,9 @@
         hide-default-footer
         loading-text="Loading... Please wait"
       >
+        <template v-slot:item.type="{ item }">
+          {{ getTypeName(item) }}
+        </template>
         <template v-slot:item.actions="{ item }">
           <button class="mr-2" @click="openEditBiddingModal(item)">Editar</button>
           <button class="ml-5" @click="deleteBidding(item)">Deletar</button>
@@ -32,11 +35,7 @@
       </v-data-table>
     </v-card>
     <v-dialog v-model="dialog">
-      <UpdateBiddingForm
-        ref="updateBiddingForm"
-        :bidding="bidding"
-        v-on:finished="dialog = false"
-      />
+      <UpdateBiddingForm ref="updateBiddingForm" :bidding="bidding" v-on:finished="dialog = false" />
     </v-dialog>
     <NewBiddingModal />
   </v-content>
@@ -81,6 +80,9 @@ export default {
   },
   methods: {
     ...mapActions(["findAllBiddings"]),
+    getTypeName(bidding) {
+      return (bidding.type === "NOTA_PRECO" && "Nota Preço") || "Menor Preço";
+    },
     openEditBiddingModal(bidding) {
       this.dialog = !this.dialog;
       this.bidding = bidding;
